@@ -82,7 +82,7 @@ export default function Header({ theme = "dark", islandingPage = true }) {
               <img
                 src={item.src}
                 alt={item.alt}
-                className={`inline-block h-8 w-auto ${currentTheme === "dark" ? "dark:text-white" : ""}`}
+                className={`inline-block h-8 w-auto`}
               />
               <span
                 className={`ml-2 ${currentTheme === "dark" ? "dark:text-gray-300" : ""}`}
