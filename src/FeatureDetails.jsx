@@ -77,7 +77,7 @@ export default function FeatureDetails() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto w-full overflow-hidden">
       <div className="relative">
         <div
           className={`duration-800 flex transition ease-out`}
@@ -99,8 +99,10 @@ export default function FeatureDetails() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`mx-1 h-14 w-14 rounded-lg bg-white p-1 ${
-                index === currentSlide ? "opacity-100" : "opacity-50"
+              className={`mx-1 h-14 w-14 rounded-lg bg-white p-2 ${
+                index === currentSlide
+                  ? "border-b-2 border-black opacity-100"
+                  : "opacity-50"
               }`}
             >
               <span className="sr-only">Navigation icons</span>
