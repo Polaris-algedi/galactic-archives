@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; // shift + alt + down to copy multiple lines
 
 export default function AboutUs() {
   const [starWarsData, setStarWarsData] = useState({});
