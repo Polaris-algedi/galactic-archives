@@ -1,4 +1,3 @@
-import Header from "./Header";
 import DarthVader from "./assets/Darth-Vader.jpg";
 
 // Photo by <a href="https://unsplash.com/@materod?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">María Ten</a> on <a href="https://unsplash.com/photos/star-wars-darth-vader-digital-wallpaper-b7Hr2YK-FuI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
@@ -6,7 +5,6 @@ import DarthVader from "./assets/Darth-Vader.jpg";
 export default function Example() {
   return (
     <>
-      <Header />
       <div className="bg-white">
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <img
