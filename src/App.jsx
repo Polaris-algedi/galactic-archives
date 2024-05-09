@@ -1,45 +1,26 @@
-//import Header from "./Header";
-import Hero from "./Hero";
-import AboutUs from "./AboutUs";
-import Features from "./AllFeatures";
-import LandingPageFooter from "./LandingPageFooter";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import FeatureDetails from "./FeatureDetails";
-
-//import { useState, useEffect } from "react";
+import LandingPage from "./LandingPage";
+import Layout from "./Layout";
+import ImageSlider from "./ImageSlider";
 
 export default function App() {
-  /*   const [theme, setTheme] = useState(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }; */
+  const AboutUs = () => <h1>About Us</h1>;
 
   return (
-    <>
-      {/* {<Header />} */}
-
-      <Hero />
-      <Features />
-      <FeatureDetails />
-      <AboutUs />
-      <LandingPageFooter />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="films" element={<ImageSlider />} />
+          <Route path="people" element={<h1>People</h1>} />
+          <Route path="planets" element={<h1>Planets</h1>} />
+          <Route path="species" element={<h1>Species</h1>} />
+          <Route path="starships" element={<h1>Starships</h1>} />
+          <Route path="vehicles" element={<h1>Vehicles</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
