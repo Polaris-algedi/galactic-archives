@@ -8,115 +8,7 @@ import phantomMenace from "../assets/phantom-menace.jpg";
 
 import { useState, useEffect } from "react";
 
-import { getAllFilms } from "../services/swapi";
-
-const categories = [
-  {
-    nav: "Film",
-    details: {
-      id: 1,
-      title: "A New Hope",
-      opening_crawl: 5,
-      director: 2,
-      producer: 3,
-      release_date: "1h ago",
-    },
-  },
-  {
-    nav: "People",
-    details: [
-      {
-        title: "Is tech making coffee better or worse?",
-        date: "Jan 7",
-        commentCount: 29,
-        shareCount: 16,
-      },
-      {
-        id: 2,
-        title: "The most innovative things happening in coffee",
-        date: "Mar 19",
-        commentCount: 24,
-        shareCount: 12,
-      },
-    ],
-  },
-  {
-    nav: "Planets",
-    details: [
-      {
-        id: 1,
-        title: "Ask Me Anything: 10 answers to your questions about coffee",
-        date: "2d ago",
-        commentCount: 9,
-        shareCount: 5,
-      },
-      {
-        id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: "4d ago",
-        commentCount: 1,
-        shareCount: 2,
-      },
-    ],
-  },
-  {
-    nav: "Species",
-    details: [
-      {
-        id: 1,
-        title: "Ask Me Anything: 10 answers to your questions about coffee",
-        date: "2d ago",
-        commentCount: 9,
-        shareCount: 5,
-      },
-      {
-        id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: "4d ago",
-        commentCount: 1,
-        shareCount: 2,
-      },
-    ],
-  },
-  {
-    nav: "Starships",
-    details: [
-      {
-        id: 1,
-        title: "Ask Me Anything: 10 answers to your questions about coffee",
-        date: "2d ago",
-        commentCount: 9,
-        shareCount: 5,
-      },
-      {
-        id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: "4d ago",
-        commentCount: 1,
-        shareCount: 2,
-      },
-    ],
-  },
-  {
-    nav: "Vehicles",
-    details: [
-      {
-        id: 1,
-        title: "Ask Me Anything: 10 answers to your questions about coffee",
-        date: "2d ago",
-        commentCount: 9,
-        shareCount: 5,
-      },
-      {
-        id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: "4d ago",
-        commentCount: 1,
-        shareCount: 2,
-      },
-    ],
-  },
-];
+import { getAllFilms, getDataFromUrls } from "../services/swapi";
 
 const images = [
   aNewHope,
@@ -132,34 +24,110 @@ const images = [
 
 export default function Films() {
   const [films, setFilms] = useState([]);
+  const [selectedFilm, setSelectedFilm] = useState(null);
+  const [relatedData, setRelatedData] = useState({});
 
   useEffect(() => {
     const fetchFilms = async () => {
       const data = await getAllFilms();
       setFilms(data);
+      if (data.length > 0) {
+        setSelectedFilm(data[0]); // Set the first film as the selected film after fetching
+      }
     };
 
     fetchFilms();
+    setSelectedFilm(films[0]);
   }, []);
 
-  console.log(films);
+  useEffect(() => {
+    const fetchRelatedData = async () => {
+      if (selectedFilm) {
+        const { characters, planets, starships, vehicles, species } =
+          selectedFilm;
+
+        const [
+          charactersData,
+          planetsData,
+          starshipsData,
+          vehiclesData,
+          speciesData,
+        ] = await Promise.all([
+          getDataFromUrls(characters),
+          getDataFromUrls(planets),
+          getDataFromUrls(starships),
+          getDataFromUrls(vehicles),
+          getDataFromUrls(species),
+        ]);
+
+        setRelatedData({
+          characters: charactersData,
+          planets: planetsData,
+          starships: starshipsData,
+          vehicles: vehiclesData,
+          species: speciesData,
+        });
+      }
+    };
+
+    fetchRelatedData();
+  }, [selectedFilm]);
+
+  console.log("relatedData", relatedData);
+
+  const handleImageClick = (index) => {
+    setSelectedFilm(films[index]);
+  };
 
   const filmImg =
     films.length > 0
       ? images.map((image, index) => {
           return {
             img: image,
-            title: films[index]?.title || "No Title", // Add a fallback for title
+            title: films[index]?.title || "No Title",
+            onClick: () => handleImageClick(index),
           };
         })
       : [];
 
-  console.log(filmImg);
+  const categories = [
+    {
+      nav: "Film",
+      details: {
+        id: selectedFilm?.episode_id,
+        title: selectedFilm?.title,
+        opening_crawl: selectedFilm?.opening_crawl,
+        director: selectedFilm?.director,
+        producer: selectedFilm?.producer,
+        release_date: selectedFilm?.release_date,
+      },
+    },
+    {
+      nav: "Characters",
+      details: relatedData?.characters,
+    },
+    {
+      nav: "Planets",
+      details: relatedData?.planets,
+    },
+    {
+      nav: "Starships",
+      details: relatedData?.starships,
+    },
+    {
+      nav: "Vehicles",
+      details: relatedData?.vehicles,
+    },
+    {
+      nav: "Species",
+      details: relatedData?.species,
+    },
+  ];
 
   return (
-    <div>
+    <>
       <ImageSlider images={filmImg} />
       <FilmDetails categories={categories} filmCover={aNewHope} />
-    </div>
+    </>
   );
 }
