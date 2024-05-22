@@ -5,6 +5,7 @@ import {
   DisclosurePanel,
   Transition,
 } from "@headlessui/react";
+import React from "react";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
@@ -39,19 +40,25 @@ export default function Tabs({ categories, filmCover }) {
                   aria-hidden="true"
                 >
                   <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                    release date: {categories[0].details.release_date}
+                    {categories[0].details.opening_crawl}
                   </li>
                   <li aria-hidden="true">
                     <hr />
                   </li>
                   <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                    opening_crawl: {categories[0].details.opening_crawl}
+                    Release date: {categories[0].details.release_date}
                   </li>
                   <li aria-hidden="true">
                     <hr />
                   </li>
                   <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                    director: {categories[0].details.director}
+                    Director: {categories[0].details.director}
+                  </li>
+                  <li aria-hidden="true">
+                    <hr />
+                  </li>
+                  <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
+                    Producer: {categories[0].details.producer}
                   </li>
                 </ul>
               </DisclosurePanel>
@@ -86,21 +93,18 @@ export default function Tabs({ categories, filmCover }) {
                     className="rounded-md p-3 text-sm/6 text-black/50  transition dark:text-white/50   "
                     aria-hidden="true"
                   >
-                    <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                      release date: {details.release_date}
-                    </li>
-                    <li aria-hidden="true">
-                      <hr />
-                    </li>
-                    <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                      opening_crawl: {details.opening_crawl}
-                    </li>
-                    <li aria-hidden="true">
-                      <hr />
-                    </li>
-                    <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                      director: {details.director}
-                    </li>
+                    {/* Avoid rendering an empty array */}
+                    {Array.isArray(details) &&
+                      details.map((detail, index) => (
+                        <React.Fragment key={index}>
+                          <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
+                            release date: {detail.name}
+                          </li>
+                          <li aria-hidden="true">
+                            <hr />
+                          </li>
+                        </React.Fragment>
+                      ))}
                   </ul>
                 </TabPanel>
               ))}
