@@ -1,25 +1,26 @@
 import ImageSlider from "../ImageSlider";
 import FilmDetails from "./FilmDetails";
 
-import aNewHope from "../assets/a-new-hope.png";
+import aNewHope from "../assets/a-new-hope.jpg";
 import empireStrikesBack from "../assets/empire-strikes-back.jpg";
 import returnOfTheJedi from "../assets/return-of-the-jedi.jpg";
 import phantomMenace from "../assets/phantom-menace.jpg";
+import attackOfTheClones from "../assets/attack-of-the-clones.jpg";
+import revengeOfTheSith from "../assets/revenge-of-the-sith.jpg";
+import forceAwakens from "../assets/force-awakens.jpg";
 
 import { useState, useEffect } from "react";
 
 import { getAllFilms, getDataFromUrls } from "../services/swapi";
 
 const images = [
+  phantomMenace,
+  attackOfTheClones,
+  revengeOfTheSith,
   aNewHope,
   empireStrikesBack,
   returnOfTheJedi,
-  phantomMenace,
-  "https://flowbite.com/docs/images/carousel/carousel-5.svg",
-  "https://flowbite.com/docs/images/carousel/carousel-1.svg",
-  "https://flowbite.com/docs/images/carousel/carousel-2.svg",
-  "https://flowbite.com/docs/images/carousel/carousel-3.svg",
-  "https://flowbite.com/docs/images/carousel/carousel-4.svg",
+  forceAwakens,
 ];
 
 export default function Films() {
@@ -32,12 +33,11 @@ export default function Films() {
       const data = await getAllFilms();
       setFilms(data);
       if (data.length > 0) {
-        setSelectedFilm(data[0]); // Set the first film as the selected film after fetching
+        setSelectedFilm(data.filter((film) => film.episode_id === 1)[0]); // Set the first film as the selected film after fetching
       }
     };
 
     fetchFilms();
-    setSelectedFilm(films[0]);
   }, []);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function Films() {
   console.log("relatedData", relatedData);
 
   const handleImageClick = (index) => {
-    setSelectedFilm(films[index]);
+    setSelectedFilm(films.filter((film) => film.episode_id === index + 1)[0]);
   };
 
   const filmImg =
@@ -86,6 +86,7 @@ export default function Films() {
             img: image,
             title: films[index]?.title || "No Title",
             onClick: () => handleImageClick(index),
+            selected: selectedFilm,
           };
         })
       : [];
@@ -100,6 +101,7 @@ export default function Films() {
         director: selectedFilm?.director,
         producer: selectedFilm?.producer,
         release_date: selectedFilm?.release_date,
+        image: images[selectedFilm?.episode_id - 1],
       },
     },
     {
