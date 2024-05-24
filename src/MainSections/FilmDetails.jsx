@@ -9,9 +9,9 @@ import React from "react";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function Tabs({ categories, filmCover }) {
+export default function FilmDetails({ categories }) {
   return (
-    <div className="flex w-full flex-col justify-center gap-40 p-4 dark:bg-black md:flex-row">
+    <div className="flex w-full flex-col justify-center gap-40 p-4 dark:bg-gray-800/90 md:flex-row">
       <div className="w-full max-w-2xl">
         <h2 className="text-center text-lg font-semibold leading-7 dark:text-white">
           {categories[0].details.title}
@@ -19,8 +19,8 @@ export default function Tabs({ categories, filmCover }) {
         <hr className="my-2" />
 
         <Disclosure defaultOpen={true}>
-          <DisclosureButton className="group flex w-full items-center justify-between rounded-md px-2 py-4 hover:bg-black/5">
-            <span className=" text-sm/6 font-medium dark:text-white dark:group-data-[hover]:text-white/80">
+          <DisclosureButton className="group flex w-full items-center justify-between rounded-md px-2 py-4 hover:bg-black/5 dark:hover:bg-white/5">
+            <span className=" text-sm/6 font-medium dark:text-white">
               Film details
             </span>
             <ChevronDownIcon className="w-5 rounded-sm bg-black/5  group-data-[open]:rotate-180 dark:text-white" />
@@ -87,7 +87,7 @@ export default function Tabs({ categories, filmCover }) {
               .map(({ nav, details }) => (
                 <TabPanel
                   key={nav}
-                  className="rounded-xl bg-black/5 p-3 dark:bg-white/5"
+                  className="max-h-80 overflow-y-auto rounded-xl bg-black/5 p-3 dark:bg-white/5"
                 >
                   <ul
                     className="rounded-md p-3 text-sm/6 text-black/50  transition dark:text-white/50   "
@@ -98,7 +98,7 @@ export default function Tabs({ categories, filmCover }) {
                       details.map((detail, index) => (
                         <React.Fragment key={index}>
                           <li className="rounded-md p-4 hover:bg-black/5 dark:hover:bg-white/5">
-                            release date: {detail.name}
+                            {detail.name}
                           </li>
                           <li aria-hidden="true">
                             <hr />
@@ -114,7 +114,7 @@ export default function Tabs({ categories, filmCover }) {
       <div className="flex items-center justify-center ">
         <div className="relative overflow-hidden rounded-lg shadow-lg transition duration-300 ease-out hover:scale-105 active:scale-100 md:hover:scale-110">
           <img
-            src={filmCover}
+            src={categories[0].details.image}
             alt="Slide"
             className="relative h-[500px] rounded-lg object-cover"
           />
