@@ -3,6 +3,7 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import Card from "./ReusableComponents/Card";
 
 export default function ImageSlider({ images }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -38,23 +39,21 @@ export default function ImageSlider({ images }) {
               className="duration-800 w-1/4 flex-shrink-0  p-5 transition ease-out"
               style={{ transform: `translateX(${currentSlide * -100}%)` }}
             >
-              <button
-                className={`relative overflow-hidden rounded-lg shadow-lg transition duration-300 ease-out hover:scale-105 active:scale-100 ${image.selected.episode_id - 1 === index ? "scale-105" : " "}`}
+              <Card
+                className={`h-96 ${image.selected.episode_id - 1 === index ? "scale-105" : " "}`}
                 onClick={() => image.onClick()}
               >
                 <img
                   src={image.img}
                   alt="Slide"
-                  className="h-96 rounded-lg object-cover"
+                  className="h-full rounded-lg object-cover"
                 />
-                <div className="absolute inset-0 rounded-lg bg-black bg-opacity-30 hover:bg-opacity-5">
-                  {/* <div className="absolute inset-x-0 bottom-0 rounded-b-lg bg-black bg-opacity-30">
+                {/* <div className="absolute inset-x-0 bottom-0 rounded-b-lg bg-black bg-opacity-30">
                     <h2 className="p-2 text-center text-3xl font-bold text-white">
                       {image.title}
                     </h2>
                   </div> */}
-                </div>
-              </button>
+              </Card>
             </div>
           ))}
         </div>
@@ -63,7 +62,7 @@ export default function ImageSlider({ images }) {
           onClick={nextSlide}
           className={`${isLastSlide ? "invisible" : ""} m-10`}
         >
-          <ChevronDoubleRightIcon className="h-6 w-6 text-red-500 lg:h-8  lg:w-8" />
+          <ChevronDoubleRightIcon className="h-6 w-6 text-red-500 lg:h-8 lg:w-8" />
         </button>
       </div>
     </>
