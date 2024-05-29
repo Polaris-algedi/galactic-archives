@@ -129,6 +129,9 @@ export const getVehicle = async (id) => {
  * @return {Promise<Array<any>>} - A promise that resolves to an array of data from each URL.
  */
 export const getDataFromUrls = async (urls) => {
+  if (!Array.isArray(urls)) {
+    urls = [urls];
+  }
   const requests = urls.map((url) =>
     axios.get(url).then((response) => response.data),
   );
