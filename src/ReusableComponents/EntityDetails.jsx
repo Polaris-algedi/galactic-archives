@@ -10,7 +10,11 @@ import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Card from "./Card";
 
-export default function EntityDetails({ entityData, children }) {
+export default function EntityDetails({
+  entityData,
+  children,
+  cardHeight = 36,
+}) {
   return (
     <div className="flex w-full flex-col justify-center gap-40 p-4 dark:bg-gray-800/90 md:flex-row">
       <div className="w-full max-w-2xl">
@@ -85,7 +89,7 @@ export default function EntityDetails({ entityData, children }) {
         </TabGroup>
       </div>
       <div className="flex items-center justify-center ">
-        <Card className="h-[36rem] cursor-default">
+        <Card className="cursor-default" style={{ height: `${cardHeight}rem` }}>
           <img
             src={entityData[0].details.image}
             alt="Slide"
