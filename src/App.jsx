@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import Films from "./MainSections/Films/Films";
 import People from "./MainSections/People/People";
 import Planets from "./MainSections/Planets/Planets";
+import Species from "./MainSections/Species/Species";
 
 export default function App() {
   const AboutUs = () => <h1>About Us</h1>;
@@ -18,7 +19,7 @@ export default function App() {
           <Route path="films" element={<Films />} />
           <Route path="people" element={<People />} />
           <Route path="planets" element={<Planets />} />
-          <Route path="species" element={<h1>Species</h1>} />
+          <Route path="species" element={<Species />} />
           <Route path="starships" element={<h1>Starships</h1>} />
           <Route path="vehicles" element={<h1>Vehicles</h1>} />
         </Route>
