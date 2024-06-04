@@ -31,6 +31,16 @@ export const getAllPlanets = async () => {
   }
 };
 
+export const getAllStarships = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/starships/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching starships data:", error);
+    throw error;
+  }
+};
+
 /* export const getAllPeople = async () => {
   try {
     const response = await axios.get(`${API_URL}/people/`);
@@ -142,8 +152,12 @@ export const getDataFromUrls = async (urls) => {
   if (!Array.isArray(urls)) {
     urls = [urls];
   }
-  const requests = urls.map((url) =>
+
+  const validUrls = urls.filter((url) => url); // Filter out null or undefined URLs
+
+  const requests = validUrls.map((url) =>
     axios.get(url).then((response) => response.data),
   );
+
   return Promise.all(requests);
 };
