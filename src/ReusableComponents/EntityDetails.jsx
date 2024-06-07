@@ -14,6 +14,7 @@ export default function EntityDetails({
   entityData,
   children,
   cardHeight = 36,
+  cardWidth = "auto",
 }) {
   return (
     <div className="flex w-full flex-col justify-center gap-40 p-4 dark:bg-gray-800/90 md:flex-row">
@@ -89,7 +90,10 @@ export default function EntityDetails({
         </TabGroup>
       </div>
       <div className="flex items-center justify-center ">
-        <Card className="cursor-default" style={{ height: `${cardHeight}rem` }}>
+        <Card
+          className="cursor-default"
+          style={{ height: `${cardHeight}rem`, width: `${cardWidth}rem` }}
+        >
           <img
             src={entityData[0].details.image}
             alt="Slide"
