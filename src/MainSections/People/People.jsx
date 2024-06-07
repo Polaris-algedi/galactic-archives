@@ -124,9 +124,11 @@ export default function People() {
   return (
     <>
       <PeopleSearch setSelectedPerson={setSelectedPerson} />
-      <EntityDetails entityData={categories}>
-        <PeopleDetails person={categories[0].details} />
-      </EntityDetails>
+      {selectedPerson ? (
+        <EntityDetails entityData={categories}>
+          <PeopleDetails person={categories[0].details} />
+        </EntityDetails>
+      ) : null}
     </>
   );
 }
