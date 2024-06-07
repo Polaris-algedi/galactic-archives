@@ -6,6 +6,8 @@ import Films from "./MainSections/Films/Films";
 import People from "./MainSections/People/People";
 import Planets from "./MainSections/Planets/Planets";
 import Species from "./MainSections/Species/Species";
+import Starships from "./MainSections/Starships/Starships";
+import Vehicles from "./MainSections/Vehicles/Vehicles";
 
 export default function App() {
   const AboutUs = () => <h1>About Us</h1>;
@@ -20,8 +22,8 @@ export default function App() {
           <Route path="people" element={<People />} />
           <Route path="planets" element={<Planets />} />
           <Route path="species" element={<Species />} />
-          <Route path="starships" element={<h1>Starships</h1>} />
-          <Route path="vehicles" element={<h1>Vehicles</h1>} />
+          <Route path="starships" element={<Starships />} />
+          <Route path="vehicles" element={<Vehicles />} />
         </Route>
       </Routes>
     </BrowserRouter>
