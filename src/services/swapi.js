@@ -41,86 +41,6 @@ export const getAllStarships = async () => {
   }
 };
 
-/* export const getAllPeople = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/people/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching people data:", error);
-    throw error;
-  }
-};
-
-export const getPerson = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/people/${id}/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching person data:", error);
-    throw error;
-  }
-};
-
-export const getAllPlanets = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/planets/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching planets data:", error);
-    throw error;
-  }
-};
-
-export const getPlanet = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/planets/${id}/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching planet data:", error);
-    throw error;
-  }
-};
-
-export const getAllSpecies = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/species/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching species data:", error);
-    throw error;
-  }
-};
-
-export const getSpecie = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/species/${id}/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching species data:", error);
-    throw error;
-  }
-};
-
-export const getAllStarships = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/starships/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching starships data:", error);
-    throw error;
-  }
-};
-
-export const getStarship = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/starships/${id}/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching starships data:", error);
-    throw error;
-  }
-};
-
 export const getAllVehicles = async () => {
   try {
     const response = await axios.get(`${API_URL}/vehicles/`);
@@ -130,17 +50,6 @@ export const getAllVehicles = async () => {
     throw error;
   }
 };
-
-export const getVehicle = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/vehicles/${id}/`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching vehicle data:", error);
-    throw error;
-  }
-};
- */
 
 /**
  * Retrieves data from multiple URLs asynchronously.
